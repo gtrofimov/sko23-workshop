@@ -50,10 +50,10 @@ steps:
     -settings soatestcli.properties \
     -import $(pwd); \
     soatestcli \
-    -resource /$() \
+    -resource $(pwd) \
     -config 'user://Example Configuration' \
-    -settings /$(pwd)/soatestcli.properties \
-    -report /$(pwd)"
+    -settings soatestcli.properties \
+    -report $(pwd)"
 
     echo -e "\nDebug -- Verify ./$(pwd) contents\n"
     ls -R $(pwd)/$(pwd)
