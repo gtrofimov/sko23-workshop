@@ -17,11 +17,11 @@ steps:
 - script: |
     echo $(Build.Repository.Name) 
     echo "Starting Pipeline Execution."
-    echo "Create ./temp directory for volume mount."
-    mkdir temp
+    echo "Create ./tmp directory for volume mount."
+    mkdir tmp
     echo ${PWD}
     echo "Copy SOAtest project contents to volume directory."
-    cp -R . temp/$(soatest.project)
+    cp -R . tmp/$(soatest.project)
     
     # Set Up and write .properties file
     echo  -e "\n~~~\nSetting up and creating soatestcli.properties file.\n"
@@ -34,34 +34,34 @@ steps:
     soatest.license.network.edition=automation_edition
     soatest.license.use_network=true
     virtualize.license.network.edition=performance_server_edition
-    virtualize.license.use_network=true" >> temp/soatestcli.properties
+    virtualize.license.use_network=true" >> tmp/soatestcli.properties
     echo -e "\nDebug -- Verify workspace contents.\n"
     ls -Rla
     echo -e "\nDebug -- Verify soatestcli.properties file contents."
-    cat temp/soatestcli.properties
+    cat tmp/soatestcli.properties
 
     # Run Docker container with mount and run tests
-    echo -e "\n~~~\nRun SOAtestCLI Docker container & mount ./temp volume.\n"
+    echo -e "\n~~~\nRun SOAtestCLI Docker container & mount ./tmp volume.\n"
     
     docker --version
 
     docker run -i \
     -u 0:0 \
     -e ACCEPT_EULA=true \
-    -v "$(pwd)/temp:/temp" \
+    -v "$(pwd)/tmp:/tmp" \
     parasoft/soavirt /bin/bash -c " \
-    cat /temp/soatestcli.properties; \
+    cat /tmp/soatestcli.properties; \
     soatestcli \
-    -settings /temp/soatestcli.properties \
-    -import /temp/$(soatest.project); \
+    -settings /tmp/soatestcli.properties \
+    -import /tmp/$(soatest.project); \
     soatestcli \
     -resource /$(soatest.project) \
     -config 'user://Example Configuration' \
-    -settings /temp/soatestcli.properties \
-    -report /temp"
+    -settings /tmp/soatestcli.properties \
+    -report /tmp"
 
-    echo -e "\nDebug -- Verify ./temp contents\n"
-    ls -R $(pwd)/temp
+    echo -e "\nDebug -- Verify ./tmp contents\n"
+    ls -R $(pwd)/tmp
   displayName: Run Tests
   env:
     pwd: $(Build.Repository.LocalPath)
@@ -72,4 +72,4 @@ steps:
   displayName: Publish SOAtest Test Results
   inputs:
     testRunner: 'SOAtest9x'
-    testResultsFiles: '$(Build.Repository.LocalPath)/temp/rep*.xml'
+    testResultsFiles: '$(Build.Repository.LocalPath)/tmp/rep*.xml'
