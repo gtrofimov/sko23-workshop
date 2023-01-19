@@ -445,6 +445,44 @@
       <name>Traffic Object</name>
      </ObjectOutputProvider>
     </MessagingOutputProvider>
+    <outputToolsSize>1</outputToolsSize>
+    <GenericAssertionTool className="webtool.assertor.GenericAssertionTool" version="v.2.1.14">
+     <iconName>XMLAssertor</iconName>
+     <name>JSON Assertor</name>
+     <XMLAssertionTool className="webtool.xml.assertion.XMLAssertionTool" version="v.2.2.1.14">
+      <iconName>XMLAssertor</iconName>
+      <name>XML Assertor</name>
+      <assertionsSize>1</assertionsSize>
+      <ValueAssertion className="webtool.assertion.xml.ValueAssertion" version="1.6.2">
+       <timestamp>1674102145132</timestamp>
+       <name>Value Assertion</name>
+       <extractEntireElement>true</extractEntireElement>
+       <Assertion_XPath>/root/success/string()</Assertion_XPath>
+       <NameValuePair className="webtool.data.NameValuePair" version="3.3">
+        <name>Value</name>
+        <MultiValue className="webtool.data.MultiValue" version="1.5">
+         <StringTestValue className="webtool.data.StringTestValue" version="4.1">
+          <value>false</value>
+         </StringTestValue>
+         <ParameterizedTestValue className="webtool.data.ParameterizedTestValue" version="3.1">
+         </ParameterizedTestValue>
+        </MultiValue>
+       </NameValuePair>
+      </ValueAssertion>
+      <ExpectedXMLMessage className="webtool.xml.ExpectedXMLMessage" version="1.2.1">
+       <message>true</message>
+      </ExpectedXMLMessage>
+     </XMLAssertionTool>
+     <TextXmlConversionStrategySerializer className="webtool.textxmlconvert.TextXmlConversionStrategySerializer" version="3">
+      <dataFormatName>JSON</dataFormatName>
+      <conversionStrategyId>JSON</conversionStrategyId>
+      <conversionStrategyClassName>com.parasoft.xml.convert.json.JsonConversionStrategy</conversionStrategyClassName>
+     </TextXmlConversionStrategySerializer>
+     <ConversionOptionSetSerializer className="webtool.textxmlconvert.ConversionOptionSetSerializer" version="2">
+     </ConversionOptionSetSerializer>
+     <TextXmlModelTypeSerializer className="webtool.textxmlconvert.TextXmlModelTypeSerializer" version="2">
+     </TextXmlModelTypeSerializer>
+    </GenericAssertionTool>
     <UserMethod className="com.parasoft.scripting.UserMethod" version="2.2">
      <code>true</code>
      <ScriptCode className="com.parasoft.scripting.jsr223.ScriptCode" version="2.1.1.1">
