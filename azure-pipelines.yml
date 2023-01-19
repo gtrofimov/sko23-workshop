@@ -52,9 +52,9 @@ steps:
     cat /temp/soatestcli.properties; \
     soatestcli \
     -settings /temp/soatestcli.properties \
-    -import /temp/$(soatest.project); \
+    -import /temp; \
     soatestcli \
-    -resource /$(soatest.project) \
+    -resource /temp \
     -config 'user://Example Configuration' \
     -settings /temp/soatestcli.properties \
     -report /temp"
