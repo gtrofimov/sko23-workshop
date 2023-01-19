@@ -15,6 +15,7 @@ steps:
 # Deploy Stage
 # Test Stage
 - script: |
+    echo $(Build.Repository.Name) 
     echo "Starting Pipeline Execution."
     echo "Create ./temp directory for volume mount."
     mkdir temp
