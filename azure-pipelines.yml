@@ -10,8 +10,10 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-# Set Up Project
 steps:
+# Build Stage 
+# Deploy Stage
+# Test Stage
 - script: |
     echo "Starting Pipeline Execution."
     echo "Create ./temp directory for volume mount."
