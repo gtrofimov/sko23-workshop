@@ -19,7 +19,8 @@ steps:
     echo "Starting Pipeline Execution."
     echo "Create ./tmp directory for volume mount."
     mkdir tmp
-    echo ${PWD}
+    echo ${PWD##*/}
+    soatest.project = ${PWD##*/}
     echo "Copy SOAtest project contents to volume directory."
     cp -R . tmp/$(soatest.project)
     
@@ -35,16 +36,19 @@ steps:
     soatest.license.use_network=true
     virtualize.license.network.edition=performance_server_edition
     virtualize.license.use_network=true" >> tmp/soatestcli.properties
-    echo -e "\nDebug -- Verify workspace contents.\n"
-    ls -Rla
-    echo -e "\nDebug -- Verify soatestcli.properties file contents."
-    cat tmp/soatestcli.properties
+    
+    # Debug
+    # echo -e "\nDebug -- Verify workspace contents.\n"
+    # ls -Rla
+    # echo -e "\nDebug -- Verify soatestcli.properties file contents."
+    # cat tmp/soatestcli.properties
 
     # Run Docker container with mount and run tests
     echo -e "\n~~~\nRun SOAtestCLI Docker container & mount ./tmp volume.\n"
     
-    docker --version
+    # docker --version
 
+    # Start and Run SOAtest Container with Import and Run Tests
     docker run -i \
     -u 0:0 \
     -e ACCEPT_EULA=true \
@@ -59,9 +63,10 @@ steps:
     -config 'user://Example Configuration' \
     -settings /tmp/soatestcli.properties \
     -report /tmp"
-
-    echo -e "\nDebug -- Verify ./tmp contents\n"
-    ls -R $(pwd)/tmp
+    
+    # Debug
+    # echo -e "\nDebug -- Verify ./tmp contents\n"
+    # ls -R $(pwd)/tmp
   displayName: Run Tests
   env:
     pwd: $(Build.Repository.LocalPath)
